@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!--[if lte IE 6]>
+<script type="text/javascript">
+function correctPNG() // correctly handle PNG transparency in Win IE 5.5 & 6.
+{
+   var arVersion = navigator.appVersion.split("MSIE")
+   var version = parseFloat(arVersion[1])
+   if ((version >= 5.5) && (document.body.filters)) 
+   {
+      for(var i=0; i<document.images.length; i++)
+      {
+         var img = document.images[i]
+         var imgName = img.src.toUpperCase()
+         if (imgName.substring(imgName.length-3, imgName.length) == "PNG")
+         {
+            var imgID = (img.id) ? "id='" + img.id + "' " : ""
+            var imgClass = (img.className) ? "class='" + img.className + "' " : ""
+            var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' "
+            var imgStyle = "display:inline-block;" + img.style.cssText 
+            if (img.align == "left") imgStyle = "float:left;" + imgStyle
+            if (img.align == "right") imgStyle = "float:right;" + imgStyle
+            if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle
+            var strNewHTML = "<span " + imgID + imgClass + imgTitle
+            + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";"
+            + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
+            + "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>" 
+            img.outerHTML = strNewHTML
+            i = i-1
+         }
+      }
+   }    
+}
+window.attachEvent("onload", correctPNG);
+</script>
+<![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Pixa Events</title>
+
+
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+
+
+<script language="JavaScript1.1">
+var slidespeed=3000
+var slideimages=new Array('1.jpg','2.jpg','3.jpg','4.jpg','6.jpg','7.jpg','14.jpg','15.jpg','52.jpg','53.jpg','54.jpg','59.jpg','61.jpg','78.jpg','80.jpg','81.jpg','82.jpg','84.jpg','85.jpg')
+var slidelinks=new Array('index.asp','gallary/birthday','events.asp','gallary/birthday','events.asp ','contact.asp','gallary/birthday','index.html',' ',' ',' ',' ',' ',' ','gallary/birthday','gallary/birthday','gallary/birthday','gallary/birthday','gallary/birthday')
+
+var newwindow=0 //open links in new window? 1=yes, 0=no
+
+var imageholder=new Array()
+var ie=document.all
+for (i=0;i<slideimages.length;i++){
+imageholder[i]=new Image()
+imageholder[i].src="catimage/"+slideimages[i]
+}
+
+function gotoshow(){
+if (newwindow)
+window.open(slidelinks[whichlink])
+else
+window.location=slidelinks[whichlink]
+}
+
+//-->
+</script>
+
+
+<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
+
+<script type="text/javascript">
+
+/*** 
+    Simple jQuery Slideshow Script
+    Released by Jon Raasch (jonraasch.com) under FreeBSD license: free to use or modify, not responsible for anything, etc.  Please link out to me if you like it :)
+***/
+
+function slideSwitch() {
+    var $active = $('#slideshow IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+    // use this to pull the images in the order they appear in the markup
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow IMG:first');
+
+    // uncomment the 3 lines below to pull the images in random order
+    
+    // var $sibs  = $active.siblings();
+    // var rndNum = Math.floor(Math.random() * $sibs.length );
+    // var $next  = $( $sibs[ rndNum ] );
+
+
+    $active.addClass('last-active');
+
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+
+$(function() {
+    setInterval( "slideSwitch()", 5000 );
+});
+
+</script>
+
+
+
+<style type="text/css">
+
+/*** set the width and height to match your images **/
+
+#slideshow {
+    position:relative;
+    height:304px;
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    opacity:0.0;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}
+
+</style>
+
+
+</head>
+<body>
+
+	<div style="background:#C82B3E url(images/bodypattern.png) repeat-x; background-attachment:fixed;">
+		<div style="background:url(images/bg.jpg) no-repeat top center; background-attachment:fixed;">
+			<div class="container">
+			<div id="header">
+				<div id="top">
+					<div class="floatL"><a href="index.asp"><img src="images/logo.jpg" border="none" id="logo"/></a></div>
+					<div class="floatL"><img src="images/pattern.png" id="pattern"/></div>
+					<div class="floatR" style="margin-top:10px;">
+						<div id="connection">
+							<a href="http://www.facebook.com" target="_blank"><img src="images/fb.png" border="none"/></a>
+							<a href="https://plus.google.com" target="_blank"><img src="images/google.png" border="none"/></a>
+							<a href="https://twitter.com" target="_blank"><img src="images/twitter.png" border="none"/></a>
+							<a href="https://www.youtube.com" target="_blank"><img src="images/you.png" border="none"/></a>
+						</div>
+						<div style="position:relative; margin-top:15px;">
+							<img src="images/ph.png" style="position:absolute; left:-50px;top:0px;">
+							<p><span style="font-family:Arial, Helvetica, sans-serif; color:#fff; font-size:20px;">CALL US Today</span><br />
+							   <span style="font-family:Arial, Helvetica, sans-serif; color:#fff; font-size:15px;">+91 80581 80581</span>	
+							</p>
+						</div>
+					</div>	
+					<div class="clear"></div>				
+				</div>	
+				<div id="slideshow" style="margin-top:5px; margin-left:3px;">
+					<img src="slider/01.jpg" alt="Slideshow Image 1" class="active" />
+					<img src="slider/02.jpg" alt="Slideshow Image 2" />
+					<img src="slider/03.jpg" alt="Slideshow Image 3" />
+					<img src="slider/04.jpg" alt="Slideshow Image 4" />
+				</div>
+				<div>
+					<div class="floatL"><img src="images/leftHead.png" /></div>
+					<div class="floatL" style="background-color:#7D6069;height:2px; width:930px; margin-top:7px;"></div>
+ 					<div class="floatL"><img src="images/right_arrow.png"/></div>
+					<div class="clear"></div>
+				</div>	
+				<div>
+				<div class="floatR" style="background:url(images/navstrip.png) repeat-x;">
+					<ul id="topnav" class="text">
+						<li><a href="index.html">Home</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="about.html?">About Us</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="events.html">What We Offer?</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="services.html">Services</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="contact.html">Contact</a></li>
+						<li><img src="images/sep.png" /></li>
+					</ul>
+				</div>	
+				<div class="floatR"><img src="images/navtag.png" /></div>
+				<div class="clear"></div>
+				</div>
+				<div style="padding-top:10px;"></div>		
+			</div>
+		</div>
+<SCRIPT src="script/validator.js" type=text/javascript></SCRIPT>
+<SCRIPT src="script/jquery.js" type=text/javascript></SCRIPT>
+<SCRIPT src="script/thickbox.js" type=text/javascript></SCRIPT>
+<LINK media=screen href="script/thickbox.css" type=text/css rel=stylesheet>
+<LINK href="script/jquery.lightbox-0.4.css" type=text/css rel=stylesheet>
+<SCRIPT src="script/jquery.lightbox-0.4.js" type=text/javascript></SCRIPT>
+<SCRIPT language=javascript>
+jQuery(document).ready(function(){
+	var arr=jQuery('#headerflash').offset();
+	arr['left']=arr['left']-58;
+	jQuery('.frame').css(arr);
+});
+
+$(function() 
+{	
+	$('.gallery').lightBox({fixedNavigation:false});	
+});
+</SCRIPT>
+<SCRIPT src="script/swfobject.js" type=text/javascript></SCRIPT>
+<SCRIPT type=text/javascript>
+			var so = new SWFObject("../flash/ja.header.swf", "headerflash", "100%", "300", "7", "#000000");	
+			so.addParam("wmode","transparent");
+			so.addParam("flashvars","xml_input=../flash/ja.headerxml.php?clientid=15");
+			so.write("headerflash");
+		</SCRIPT>
+
+		<div class="container">
+	<h3 style="margin-left:30px;">Birthday Party</h3>
+		
+	</div>
+	<div class="container">
+	<div style="margin-left:420px;"><img src="images/pattern.png" /></div>
+<div style="padding-top:20px; padding-left:20px;">
+									<div class="floatL"><img src="images/leftHead.png" /></div>
+									<div class="floatL" style="background-color:#7D6069;height:2px; width:900px; margin-top:7px;"></div>
+									<div class="floatL"><img src="images/right_arrow.png" /></div>
+									<div class="clear"></div>
+									<div style="font-family:Arial, Helvetica, sans-serif; color:#FC80B7; font-size:15px; font-weight:bold; padding:10px 0px;"> Everyone looks forward to birthdays, be it your own or your loved one's.Birthdays are special as we get wishes from loved one.
+										<h3 style="padding:20px 0px;">Decoration</h3>
+									
+									</div>
+									
+								</div>
+								</div>
+		
+
+<DIV class="container">
+
+<DIV id=headerflash style="WIDTH: 500px; HEIGHT: 0px"></DIV>
+<DIV >
+<DIV class="mid-big" >
+<div class="floatL" style="border:0px solid red;">
+									
+									<div id="decor_list">
+									  <div class="floatL">
+										<ul>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>											
+										</ul>
+									   </div>
+									   <div class="floatL">
+									   	<ul>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>
+											<li>Theme</li>											
+											<li>Theme</li>
+										</ul>
+									   </div>
+									   <div class="clear"></div>
+									</div>
+									
+		<table  border="0" cellspacing="1" cellpadding="1" style="margin-left:30px;" >
+  
+  
+  <tr>
+ <td colspan="2" align="center">&nbsp;</td>
+ </tr>
+<tr>
+
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/88.jpg"><img src="gallery/88.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/80.jpg"><img src="gallery/80.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/81.jpg"><img src="gallery/81.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ </tr><tr>
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/82.jpg"><img src="gallery/82.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/83.jpg"><img src="gallery/83.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/84.jpg"><img src="gallery/84.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ </tr><tr>
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/87.jpg"><img src="gallery/87.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/149.jpg"><img src="gallery/149.jpg" width="220" height="150" style="border:2px solid #fff;" alt="03" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">03</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/89.jpg"><img src="gallery/89.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ </tr><tr>
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/90.jpg"><img src="gallery/90.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/91.jpg"><img src="gallery/91.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ 
+<td align="center" valign="top">
+
+ <table  border="0" cellspacing="1" cellpadding="1">
+<tr><td align="center" valign="top">
+<a class="gallery" style="font-family:Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; font-weight:bold; font-size:12px;" href="gallery/92.jpg"><img src="gallery/92.jpg" width="220" height="150" style="border:2px solid #fff;" alt="Pixa Events" /></a>
+</td></tr>
+<tr> 
+                      <td><div align="center"><b style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">Pixa Events</b></div></td>
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+<tr> 
+                      
+                    </tr>
+                   <tr><td height="15"></td></tr> 
+                </table></td>
+ </tr><tr>
+ </tr>
+ 
+</table>
+</div>
+
+<div id="sidebar" class="floatR" style="margin-right:20px;">
+					<div class="floatR text" style="font-size:13px; color:#fff;">
+							<h2 class="text1">Features</h2>
+							<div id="list">
+								<ul>
+								
+										<li><a href="gallery1.html">Birthday Party</a></li>
+								
+										<li><a href="gallery2.html">Catering service</a></li>
+								
+										<li><a href="gallery3.html">Confrences</a></li>
+								
+										<li><a href="gallery4.html">Wedding Decoration</a></li>
+										
+								</ul>
+							
+								<div id="message">
+									<p style="width:150px;">
+										Write some quote here...
+									</p>
+								</div>
+							</div>
+						</div>
+				</div>
+
+<div class="clear"></div>
+</DIV></DIV>
+</DIV>
+
+
+<div class="container">
+<div style="padding-top:20px; padding-left:20px;">
+									<div class="floatL"><img src="images/leftHead.png" /></div>
+									<div class="floatL" style="background-color:#7D6069;height:2px; width:900px; margin-top:7px;"></div>
+									<div class="floatL"><img src="images/right_arrow.png" /></div>
+									<div class="clear"></div>
+								</div>
+								</div>
+
+<div id="footer" >	
+			<div class="container">
+					<div id="layer2" style="width:970px; margin:0 auto;">
+						<div class="floatR">
+							<h2 class="text1">Contact Us</h2>
+							<ul id=contact>
+								<li style="list-style-image:url(images/home.png);">
+									<p style="font-weight:normal;"><span style="font-weight:bold;">Pixa Events</span><br />
+									   1st B Road, Sardarpura,<br />
+									   Near goal building circle,<br />
+									   jodhpur-Rajasthan
+									</p>
+								</li>
+								<li style="list-style-image:url(images/phn.png);"><p>+91 90505 80505</p></li>
+								<li style="list-style-image:url(images/@.png);"><p><a href="mailto:contact@jainevents.com">contact@jainevents.com</a></p></li>
+							</ul>
+						</div>
+						<div class="clear"></div>					
+					</div>	
+			</div>
+					<div class="total">		
+					<div class="container">		
+						<div class="floatL">
+							<p>Copyright Reserved &copy; <a href="index.asp">Pixa Events</a>: 2016</p>
+						</div>		
+						<div class="floatR">
+							<p>Developed By : <a href="http://abc.co.in" target="_blank">abc</a></p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					</div>
+				
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

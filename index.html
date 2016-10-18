@@ -1,0 +1,295 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!--[if lte IE 6]>
+<script type="text/javascript">
+function correctPNG() // correctly handle PNG transparency in Win IE 5.5 & 6.
+{
+   var arVersion = navigator.appVersion.split("MSIE")
+   var version = parseFloat(arVersion[1])
+   if ((version >= 5.5) && (document.body.filters)) 
+   {
+      for(var i=0; i<document.images.length; i++)
+      {
+         var img = document.images[i]
+         var imgName = img.src.toUpperCase()
+         if (imgName.substring(imgName.length-3, imgName.length) == "PNG")
+         {
+            var imgID = (img.id) ? "id='" + img.id + "' " : ""
+            var imgClass = (img.className) ? "class='" + img.className + "' " : ""
+            var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' "
+            var imgStyle = "display:inline-block;" + img.style.cssText 
+            if (img.align == "left") imgStyle = "float:left;" + imgStyle
+            if (img.align == "right") imgStyle = "float:right;" + imgStyle
+            if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle
+            var strNewHTML = "<span " + imgID + imgClass + imgTitle
+            + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";"
+            + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
+            + "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>" 
+            img.outerHTML = strNewHTML
+            i = i-1
+         }
+      }
+   }    
+}
+window.attachEvent("onload", correctPNG);
+</script>
+<![endif]-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Pixa Events</title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+
+
+
+<script type="text/javascript" src="jquery-1.2.6.min.js"></script>
+
+<script type="text/javascript">
+
+/*** 
+    Simple jQuery Slideshow Script
+    Released by Jon Raasch (jonraasch.com) under FreeBSD license: free to use or modify, not responsible for anything, etc.  Please link out to me if you like it :)
+***/
+
+function slideSwitch() {
+    var $active = $('#slideshow IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+    // use this to pull the images in the order they appear in the markup
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow IMG:first');
+
+    // uncomment the 3 lines below to pull the images in random order
+    
+    // var $sibs  = $active.siblings();
+    // var rndNum = Math.floor(Math.random() * $sibs.length );
+    // var $next  = $( $sibs[ rndNum ] );
+
+
+    $active.addClass('last-active');
+
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+
+$(function() {
+    setInterval( "slideSwitch()", 5000 );
+});
+
+</script>
+
+
+
+<style type="text/css">
+
+/*** set the width and height to match your images **/
+
+#slideshow {
+    position:relative;
+    height:304px;
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+    opacity:0.0;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+    opacity:1.0;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+	<div style="background:#C82B3E url(images/bodypattern.png) repeat-x; background-attachment:fixed;">
+		<div style="background:url(images/bg.jpg) no-repeat top center; background-attachment:fixed;">
+			<div class="container">
+			<div id="header">
+				<div id="top">
+					<div class="floatL"><a href="index.html"><img src="images/logo.jpg" border="none" id="logo"/></a></div>
+					<div class="floatL"><img src="images/pattern.png" id="pattern"/></div>
+					<div class="floatR" style="margin-top:10px;">
+						<div id="connection">
+							<a href="http://www.facebook.com" target="_blank"><img src="images/fb.png" border="none"/></a>
+							<a href="https://plus.google.com" target="_blank"><img src="images/google.png" border="none"/></a>
+							<a href="https://twitter.com" target="_blank"><img src="images/twitter.png" border="none"/></a>
+							<a href="https://www.youtube.com" target="_blank"><img src="images/you.png" border="none"/></a>
+						</div>
+						<div style="position:relative; margin-top:15px;">
+							<img src="images/ph.png" style="position:absolute; left:-50px;top:0px;">
+							<p><span style="font-family:Arial, Helvetica, sans-serif; color:#fff; font-size:20px;">CALL US Today</span><br />
+							   <span style="font-family:Arial, Helvetica, sans-serif; color:#fff; font-size:15px;">+91 90505 80505</span>	
+							</p>
+						</div>
+					</div>	
+					<div class="clear"></div>				
+				</div>	
+				<div id="slideshow" style="margin-top:5px; margin-left:3px;">
+					<img src="slider/01.jpg" alt="Slideshow Image 1" class="active" />
+					<img src="slider/02.jpg" alt="Slideshow Image 2" />
+					<img src="slider/03.jpg" alt="Slideshow Image 3" />
+					<img src="slider/04.jpg" alt="Slideshow Image 4" />
+				</div>
+				<div>
+					<div class="floatL"><img src="images/leftHead.png" /></div>
+					<div class="floatL" style="background-color:#7D6069;height:2px; width:930px; margin-top:7px;"></div>
+ 					<div class="floatL"><img src="images/right_arrow.png"/></div>
+					<div class="clear"></div>
+				</div>	
+				<div>
+				<div class="floatR" style="background:url(images/navstrip.png) repeat-x;">
+					<ul id="topnav" class="text">
+						<li><a href="index.html">Home</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="about.html">About us</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="events.html">What We Offer?</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="services.html">Services</a></li>
+						<li><img src="images/sep.png" /></li>
+						<li><a href="contact.html">Contact</a></li>
+						<li><img src="images/sep.png" /></li>
+					</ul>
+				</div>	
+				<div class="floatR"><img src="images/navtag.png" /></div>
+				<div class="clear"></div>
+				</div>
+				<div style="padding-top:10px;"></div>		
+			</div>
+		</div>
+			<div class="container"><!-- content goes here-->
+						<div id="content">
+							<div id="layer1">
+								<div style="margin-left:420px;"><img src="images/pattern.png" /></div>
+								<div>
+									<div class="floatL"><img src="images/leftHead.png" /></div>
+									<div class="floatL" style="background-color:#7D6069;height:2px; width:900px; margin-top:7px;"></div>
+									<div class="floatL"><img src="images/right_arrow.png" /></div>
+									<div class="clear"></div>
+								</div>
+								<div>
+								<div class="floatL">
+									<div style="border:0px solid black;">
+										<div class="floatL">
+											<h2 class="text1" style="margin-left:10px;">Who We Are?</h2>
+											<div>
+												<div><img src="images/pic.png" style="border:3px solid #fff;"/></div>
+												<div style="padding-top:10px;"></div>
+												<div><img src="images/pattern.png" /></div>
+											</div>
+										</div>
+										<div class="floatL text" style="width:580px; margin-left:10px; margin-top:18px;">
+										<p>
+											About Pixa Events & Entertainment Pvt. Ltd.
+An Events and Entertainment company which caters to corporate events, birthday parties, weddings, from ideating to completion of the event.	
+										</p>
+										
+										<p>
+											 Our aim is to provide world class services that will not cost a fortune. Come and join us for best live band, orchestra and very effective show services. We use advance techniques and innovative theme to make events more effective. It makes us special to others. We are capable of providing various types of event services	
+										</p>
+										
+										
+										<p style="text-align:right;"><a href="about.html" id="more">More...</a></p>
+									</div>	
+									<div class="clear"></div>	
+									</div>
+																
+								<div class="clear"></div>							
+							</div>
+						</div>
+					</div>
+			
+				<div id="sidebar" style="margin-right:20px;">
+					<div class="floatR text" style="font-size:13px; color:#fff;">
+							<h2 class="text1">Features</h2>
+							<div id="list">
+								<ul>
+								
+										<li><a href="gallery1.html">Birthday Party</a></li>
+								
+										<li><a href="gallery2.html">Catering service</a></li>
+								
+										<li><a href="gallery3.html">Confrences</a></li>
+								
+										<li><a href="gallery4.html">Wedding Decoration</a></li>
+										
+								</ul>
+							
+								<div id="message">
+									<p style="width:150px;">
+										Write some quote here...
+									</p>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="clear"></div>
+				
+				<div style="padding-top:20px;">
+									<div class="floatL"><img src="images/leftHead.png" /></div>
+									<div class="floatL" style="background-color:#7D6069;height:2px; width:900px; margin-top:7px;"></div>
+									<div class="floatL"><img src="images/right_arrow.png" /></div>
+									<div class="clear"></div>
+								</div>
+				
+				
+				</div>
+			</div>
+<div id="footer" >	
+			<div class="container">
+					<div id="layer2" style="width:970px; margin:0 auto;">
+						
+						</div>
+						<div class="floatR">
+							<h2 class="text1">Contact Us</h2>
+							<ul id=contact>
+								<li style="list-style-image:url(images/home.png);">
+									<p style="font-weight:normal;"><span style="font-weight:bold;">Pixa Events</span><br />
+									   a-203, orchid, bldg no. 10,<br />
+									   mirchandani gardens, suncity,<br /> 
+									   100 feet road, vasai road west,<br />
+									   thane mumbai city mh 401201 in
+									</p>
+								</li>
+								<li style="list-style-image:url(images/phn.png);"><p>+91 90505 80505</p></li>
+								<li style="list-style-image:url(images/@.png);"><p><a href="mailto:contact@pixaevents.com">contact@pixaevents.com</a></p></li>
+							</ul>
+						</div>
+						<div class="clear"></div>					
+					</div>	
+			</div>
+					<div class="total">		
+					<div class="container">		
+						<div class="floatL">
+							<p>Copyright Reserved &copy; <a href="index.html">Pixa Events</a>: 2016</p>
+						</div>		
+						<div class="floatR">
+							<p>Developed By : <a href="http://abc.co.in" target="_blank">abc</a></p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					</div>
+				
+			</div>
+		</div>	
+	</div>
+</body>
+</html>
+
